@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recomeço - Autoajuda e Carreira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo no-print">
+    <a href="#inicio" class="logo">🌱 Recomeço</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+    <nav id="menu">
+      <a href="#inicio">Início</a>
+      <a href="#curriculo">Currículo</a>
+      <a href="#carta">Carta</a>
+      <a href="#metas">Metas</a>
+      <a href="#habitos">Hábitos</a>
+      <a href="#diario">Diário</a>
+      <a href="#dicas">Dicas</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- INÍCIO -->
+    <section id="inicio" class="pagina">
+      <div class="hero">
+        <h1>Um passo de cada vez.</h1>
+        <p>Organize sua vida, cuide da mente e prepare sua carreira. Tudo em um só lugar, gratuito e salvo no seu navegador.</p>
+        <div class="frase-card">
+          <p id="frase" class="frase"></p>
+          <button class="btn secundario" id="novaFrase">Outra frase</button>
+        </div>
+      </div>
+      <div class="grade-cards">
+        <a href="#curriculo" class="card-link"><span>📄</span><h3>Criar currículo</h3><p>Preencha, veja a prévia e baixe em PDF.</p></a>
+        <a href="#metas" class="card-link"><span>🎯</span><h3>Minhas metas</h3><p>Defina objetivos e acompanhe o progresso.</p></a>
+        <a href="#habitos" class="card-link"><span>✅</span><h3>Hábitos</h3><p>Marque seus hábitos diários da semana.</p></a>
+        <a href="#diario" class="card-link"><span>📓</span><h3>Diário</h3><p>Registre seu humor e sua gratidão.</p></a>
+        <a href="#dicas" class="card-link"><span>💡</span><h3>Dicas</h3><p>Entrevistas, ansiedade e produtividade.</p></a>
+      </div>
+    </section>
+
+    <!-- CURRÍCULO -->
+    <section id="curriculo" class="pagina">
+      <h2 class="no-print">Gerador de Currículo</h2>
+      <p class="sub no-print">Tudo é salvo automaticamente neste navegador. Clique em "Baixar PDF" e escolha "Salvar como PDF".</p>
+      <div class="cv-layout">
+        <form id="cvForm" class="cv-form no-print" autocomplete="on">
+          <fieldset>
+            <legend>Dados pessoais</legend>
+            <label>Nome completo<input name="nome" placeholder="Maria da Silva"></label>
+            <label>Cargo desejado<input name="cargo" placeholder="Assistente Administrativo"></label>
+            <div class="duas">
+              <label>E-mail<input name="email" type="email" placeholder="maria@email.com"></label>
+              <label>Telefone<input name="telefone" placeholder="(11) 99999-9999"></label>
+            </div>
+            <div class="duas">
+              <label>Cidade / Estado<input name="cidade" placeholder="São Paulo - SP"></label>
+              <label>LinkedIn ou site<input name="link" placeholder="linkedin.com/in/maria"></label>
+            </div>
+            <label>Resumo profissional<textarea name="resumo" rows="4" placeholder="Fale em 3 a 4 linhas quem você é e o que oferece."></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Experiência profissional</legend>
+            <div id="listaExperiencia"></div>
+            <button type="button" class="btn secundario" data-add="experiencia">+ Adicionar experiência</button>
+          </fieldset>
+
+          <fieldset>
+            <legend>Formação</legend>
+            <div id="listaFormacao"></div>
+            <button type="button" class="btn secundario" data-add="formacao">+ Adicionar formação</button>
+          </fieldset>
+
+          <fieldset>
+            <legend>Habilidades e extras</legend>
+            <label>Habilidades (separe por vírgula)<input name="habilidades" placeholder="Excel, Atendimento ao cliente, Organização"></label>
+            <label>Idiomas (separe por vírgula)<input name="idiomas" placeholder="Português nativo, Inglês intermediário"></label>
+            <label>Cursos e certificações (um por linha)<textarea name="cursos" rows="3"></textarea></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Aparência</legend>
+            <div class="duas">
+              <label>Modelo
+                <select name="modelo">
+                  <option value="classico">Clássico</option>
+                  <option value="moderno">Moderno</option>
+                </select>
+              </label>
+              <label>Cor principal<input name="cor" type="color" value="#2f6f5e"></label>
+            </div>
+          </fieldset>
+
+          <div class="acoes">
+            <button type="button" class="btn" id="baixarPdf">Baixar PDF</button>
+            <button type="button" class="btn secundario" id="exemploCv">Preencher exemplo</button>
+            <button type="button" class="btn perigo" id="limparCv">Limpar tudo</button>
+          </div>
+        </form>
+
+        <div class="cv-preview-wrap">
+          <article id="cvPreview" class="cv"></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTA DE APRESENTAÇÃO -->
+    <section id="carta" class="pagina">
+      <h2 class="no-print">Carta de Apresentação</h2>
+      <p class="sub no-print">Preencha os campos e, se quiser, gere um texto de partida usando os dados do seu currículo.</p>
+      <div class="cv-layout">
+        <form id="cartaForm" class="cv-form no-print">
+          <fieldset>
+            <legend>Dados</legend>
+            <label>Seu nome<input name="nome" placeholder="Maria da Silva"></label>
+            <div class="duas">
+              <label>Cargo pretendido<input name="cargo" placeholder="Assistente Administrativo"></label>
+              <label>Empresa<input name="empresa" placeholder="Nome da empresa"></label>
+            </div>
+            <label>Aos cuidados de (opcional)<input name="contato" placeholder="Ex.: À equipe de Recursos Humanos"></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Texto da carta</legend>
+            <label>Corpo da carta<textarea name="corpo" rows="14" placeholder="Escreva aqui ou clique em &quot;Gerar sugestão&quot; abaixo."></textarea></label>
+          </fieldset>
+
+          <div class="acoes">
+            <button type="button" class="btn" id="baixarCartaPdf">Baixar PDF</button>
+            <button type="button" class="btn secundario" id="gerarSugestaoCarta">Gerar sugestão com meu currículo</button>
+            <button type="button" class="btn perigo" id="limparCarta">Limpar tudo</button>
+          </div>
+        </form>
+
+        <div class="cv-preview-wrap">
+          <article id="cartaPreview" class="cv carta-doc"></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- METAS -->
+    <section id="metas" class="pagina">
+      <h2>Minhas Metas</h2>
+      <p class="sub">Metas boas são específicas e têm prazo. Divida em pequenos passos.</p>
+      <form id="metaForm" class="linha-form">
+        <input name="titulo" placeholder="Ex.: Conseguir um emprego na minha área" required>
+        <input name="prazo" type="date" aria-label="Prazo">
+        <button class="btn">Adicionar</button>
+      </form>
+      <div id="listaMetas" class="lista"></div>
+    </section>
+
+    <!-- HÁBITOS -->
+    <section id="habitos" class="pagina">
+      <h2>Hábitos da Semana</h2>
+      <p class="sub">Marque os dias em que você cumpriu cada hábito. Constância vale mais que perfeição.</p>
+      <form id="habitoForm" class="linha-form">
+        <input name="nome" placeholder="Ex.: Beber 2 litros de água" required>
+        <button class="btn">Adicionar</button>
+      </form>
+      <div class="tabela-wrap">
+        <table id="tabelaHabitos" class="tabela-habitos"></table>
+      </div>
+      <button class="btn secundario" id="novaSemana">Começar nova semana</button>
+    </section>
+
+    <!-- DIÁRIO -->
+    <section id="diario" class="pagina">
+      <h2>Diário</h2>
+      <p class="sub">Escrever ajuda a organizar os pensamentos. Suas anotações ficam só no seu aparelho.</p>
+      <form id="diarioForm" class="cartao">
+        <p class="rotulo">Como você está hoje?</p>
+        <div class="humores" id="humores">
+          <button type="button" data-humor="😄">😄</button>
+          <button type="button" data-humor="🙂">🙂</button>
+          <button type="button" data-humor="😐">😐</button>
+          <button type="button" data-humor="😔">😔</button>
+          <button type="button" data-humor="😣">😣</button>
+        </div>
+        <label>3 coisas pelas quais sou grato(a)<textarea name="gratidao" rows="3" placeholder="1. ...&#10;2. ...&#10;3. ..."></textarea></label>
+        <label>O que está na minha cabeça<textarea name="texto" rows="4"></textarea></label>
+        <button class="btn">Salvar registro</button>
+      </form>
+      <div id="listaDiario" class="lista"></div>
+    </section>
+
+    <!-- DICAS -->
+    <section id="dicas" class="pagina">
+      <h2>Dicas</h2>
+      <div class="dicas">
+        <details open>
+          <summary>📄 Como fazer um bom currículo</summary>
+          <ul>
+            <li>Mantenha em uma página, no máximo duas.</li>
+            <li>Comece cada experiência com um verbo de ação: organizei, atendi, reduzi, criei.</li>
+            <li>Mostre resultados com números sempre que puder.</li>
+            <li>Adapte o resumo e o cargo para cada vaga.</li>
+            <li>Use um e-mail profissional e revise a ortografia.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>🤝 Preparação para entrevista</summary>
+          <ul>
+            <li>Pesquise a empresa: o que faz, valores, notícias recentes.</li>
+            <li>Prepare exemplos no formato Situação, Tarefa, Ação e Resultado.</li>
+            <li>Treine respostas para "fale sobre você" e "por que devemos te contratar".</li>
+            <li>Leve perguntas para o entrevistador. Isso mostra interesse.</li>
+            <li>Chegue 10 minutos antes ou teste a conexão se for online.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>🧘 Lidando com a ansiedade</summary>
+          <ul>
+            <li>Respiração 4-7-8: inspire por 4 segundos, segure por 7, solte por 8.</li>
+            <li>Técnica 5-4-3-2-1: nomeie 5 coisas que vê, 4 que toca, 3 que ouve, 2 que cheira e 1 que saboreia.</li>
+            <li>Movimente o corpo. Uma caminhada curta já ajuda.</li>
+            <li>Durma e acorde em horários parecidos.</li>
+            <li>Se a ansiedade atrapalha sua rotina, procure um profissional de saúde.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>⏱️ Produtividade</summary>
+          <ul>
+            <li>Técnica Pomodoro: 25 minutos de foco e 5 de pausa.</li>
+            <li>Escolha as 3 tarefas mais importantes do dia logo pela manhã.</li>
+            <li>Se algo leva menos de 2 minutos, faça agora.</li>
+            <li>Deixe o celular longe durante os blocos de foco.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>🆘 Precisa de ajuda agora?</summary>
+          <p>Se você está passando por um momento difícil, não fique sozinho(a). O <strong>CVV</strong> atende gratuitamente 24 horas pelo telefone <strong>188</strong> ou pelo site <a href="https://cvv.org.br" target="_blank" rel="noopener">cvv.org.br</a>. Em emergência, ligue <strong>192</strong> (SAMU).</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="no-print">
+    <p>Recomeço · Seus dados ficam salvos apenas neste navegador.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
