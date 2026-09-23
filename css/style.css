@@ -185,6 +185,20 @@ input[type="checkbox"] { width: 20px; height: 20px; margin: 0; accent-color: var
 .registro-topo strong { font-size: 1.4rem; }
 .registro p { white-space: pre-line; margin: 6px 0 0; }
 
+/* Respiração guiada */
+.respirar-controles { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin-bottom: 32px; }
+.respirar-controles label { margin: 0; min-width: 240px; }
+.respirar-area { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 20px 0 40px; }
+.respirar-circulo {
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--verde-claro), var(--verde));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 1.2rem; text-align: center;
+  transform: scale(0.85);
+  box-shadow: 0 0 0 12px var(--verde-claro);
+}
+.respirar-ciclos { color: var(--suave); }
+
 /* Dicas */
 .dicas details {
   background: var(--cartao); border: 1px solid var(--borda); border-radius: var(--raio);

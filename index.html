@@ -19,6 +19,8 @@
       <a href="#metas">Metas</a>
       <a href="#habitos">Hábitos</a>
       <a href="#diario">Diário</a>
+      <a href="#respirar">Respirar</a>
+      <a href="#checklist">Checklist</a>
       <a href="#dicas">Dicas</a>
     </nav>
   </header>
@@ -189,6 +191,41 @@
       <div id="listaDiario" class="lista"></div>
     </section>
 
+    <!-- RESPIRAÇÃO GUIADA -->
+    <section id="respirar" class="pagina">
+      <h2>Respiração Guiada</h2>
+      <p class="sub">Sente-se confortavelmente, escolha uma técnica e siga o ritmo do círculo.</p>
+      <div class="respirar-controles">
+        <label>Técnica
+          <select id="tecnicaRespirar">
+            <option value="478">4-7-8 · relaxante, boa para dormir</option>
+            <option value="box">Quadrada 4-4-4-4 · foco e calma</option>
+            <option value="calma">Simples 4-6 · alívio rápido</option>
+          </select>
+        </label>
+        <button class="btn" id="iniciarRespirar">Começar</button>
+        <button class="btn secundario" id="pararRespirar" hidden>Parar</button>
+      </div>
+      <div class="respirar-area">
+        <div class="respirar-circulo" id="circuloRespirar"><span id="respirarTexto">Pronto?</span></div>
+        <p class="respirar-ciclos" id="ciclosRespirar"></p>
+      </div>
+    </section>
+
+    <!-- CHECKLIST DE BUSCA DE EMPREGO -->
+    <section id="checklist" class="pagina">
+      <h2>Checklist de Busca de Emprego</h2>
+      <p class="sub">Marque o que já está pronto. Adicione outros itens se precisar.</p>
+      <form id="checklistForm" class="linha-form">
+        <input name="texto" placeholder="Adicionar item ao checklist" required>
+        <button class="btn">Adicionar</button>
+      </form>
+      <div class="barra"><div id="checklistBarra" style="width:0%"></div></div>
+      <p class="meta-prazo" id="checklistResumo"></p>
+      <ul class="passos" id="listaChecklist"></ul>
+      <button class="btn secundario" id="restaurarChecklist">Restaurar itens padrão</button>
+    </section>
+
     <!-- DICAS -->
     <section id="dicas" class="pagina">
       <h2>Dicas</h2>
@@ -230,6 +267,55 @@
             <li>Escolha as 3 tarefas mais importantes do dia logo pela manhã.</li>
             <li>Se algo leva menos de 2 minutos, faça agora.</li>
             <li>Deixe o celular longe durante os blocos de foco.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>💼 LinkedIn e busca de vagas</summary>
+          <ul>
+            <li>Use uma foto profissional e um título claro, como "Assistente Administrativo | Organização e Atendimento".</li>
+            <li>Ative a opção "Aberto a oportunidades" nas configurações de privacidade do perfil.</li>
+            <li>Siga empresas do seu interesse e comente ou curta publicações da sua área.</li>
+            <li>Peça recomendações a ex-colegas, professores ou chefes.</li>
+            <li>Cadastre-se em mais de um site de vagas, não só em um.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>💰 Finanças pessoais básicas</summary>
+          <ul>
+            <li>Anote tudo o que entra e sai por um mês antes de montar um orçamento.</li>
+            <li>Separe uma reserva de emergência todo mês, mesmo que seja pouco.</li>
+            <li>Priorize dívidas com juros mais altos, como cartão de crédito e cheque especial.</li>
+            <li>Antes de uma compra por impulso, espere 24 horas.</li>
+            <li>Revise assinaturas e gastos fixos a cada três meses.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>😴 Sono de qualidade</summary>
+          <ul>
+            <li>Durma e acorde nos mesmos horários, inclusive nos fins de semana.</li>
+            <li>Evite telas de celular e computador pelo menos 30 minutos antes de dormir.</li>
+            <li>Deixe o quarto escuro, silencioso e numa temperatura agradável.</li>
+            <li>Evite cafeína a partir do meio da tarde.</li>
+            <li>Se a mente estiver cheia de pensamentos, escreva-os num papel antes de deitar.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>🚪 Lidando com a rejeição</summary>
+          <ul>
+            <li>Uma recusa não define o seu valor. Às vezes a vaga simplesmente não era a certa.</li>
+            <li>Peça um retorno ao recrutador. Nem sempre respondem, mas vale tentar.</li>
+            <li>Dê um tempo para sentir a frustração e depois volte a tentar.</li>
+            <li>Revise o currículo e a carta antes da próxima candidatura.</li>
+            <li>Candidate-se a várias vagas ao mesmo tempo, não só a uma.</li>
+          </ul>
+        </details>
+        <details>
+          <summary>🤝 Networking para quem está começando</summary>
+          <ul>
+            <li>Conecte-se com colegas de curso, ex-professores e ex-colegas de trabalho.</li>
+            <li>Participe de grupos e eventos gratuitos da sua área.</li>
+            <li>Ofereça ajuda antes de pedir algo. Networking é uma via de mão dupla.</li>
+            <li>Mantenha contato de vez em quando, não apenas quando precisar de algo.</li>
           </ul>
         </details>
         <details>

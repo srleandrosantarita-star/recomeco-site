@@ -20,6 +20,7 @@ const id = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6
 function mostrarPagina() {
   const alvo = (location.hash || "#inicio").slice(1);
   const pagina = document.getElementById(alvo) || document.getElementById("inicio");
+  if (pagina.id !== "respirar" && typeof pararRespiracao === "function") pararRespiracao();
   $$(".pagina").forEach(p => p.classList.toggle("visivel", p === pagina));
   $$("nav a").forEach(a => a.classList.toggle("ativo", a.getAttribute("href") === "#" + pagina.id));
   $("#menu").classList.remove("aberto");
@@ -40,6 +41,20 @@ const frases = [
   "Feito é melhor que perfeito.",
   "Grandes coisas nunca vêm de zonas de conforto.",
   "Tudo o que um sonho precisa para ser realizado é alguém que acredite que ele possa ser realizado. — Roberto Shinyashiki",
+  "A jornada de mil quilômetros começa com um único passo. — Lao Tsé",
+  "Não deixe o que você não pode fazer interferir no que você pode fazer. — John Wooden",
+  "Você é mais forte do que pensa e mais capaz do que imagina.",
+  "O fracasso é apenas a oportunidade de recomeçar de novo, com mais inteligência. — Henry Ford",
+  "Cuide do seu corpo. É o único lugar que você tem para viver. — Jim Rohn",
+  "Pequenos progressos ainda são progresso.",
+  "Você não precisa ser perfeito, precisa ser constante.",
+  "A mudança começa no momento em que você decide tentar.",
+  "Confie no processo. Toda grande jornada tem dias difíceis.",
+  "O que importa não é de onde você veio, é para onde você está indo.",
+  "Descanse se precisar, mas não desista.",
+  "Aprenda com o ontem, viva o hoje, tenha esperança para amanhã. — Albert Einstein",
+  "Acredite que você pode e você já está no meio do caminho. — Theodore Roosevelt",
+  "Não espere motivação para começar. Comece, e a motivação vem depois.",
 ];
 let fraseAtual = Math.floor(Math.random() * frases.length);
 function mostrarFrase() { $("#frase").textContent = "“" + frases[fraseAtual] + "”"; }
@@ -414,6 +429,96 @@ $("#listaDiario").addEventListener("click", e => {
   salvar("diario", diario); desenharDiario();
 });
 
+// ---------- Respiração guiada ----------
+const tecnicasRespirar = {
+  "478": [{ fase: "Inspire", seg: 4, escala: 1.35 }, { fase: "Segure", seg: 7, escala: 1.35 }, { fase: "Solte", seg: 8, escala: 0.85 }],
+  box: [{ fase: "Inspire", seg: 4, escala: 1.35 }, { fase: "Segure", seg: 4, escala: 1.35 }, { fase: "Solte", seg: 4, escala: 0.85 }, { fase: "Segure", seg: 4, escala: 0.85 }],
+  calma: [{ fase: "Inspire", seg: 4, escala: 1.35 }, { fase: "Solte", seg: 6, escala: 0.85 }],
+};
+let respirarTimer = null;
+let respirarCiclos = 0;
+function pararRespiracao() {
+  clearTimeout(respirarTimer); respirarTimer = null;
+  $("#circuloRespirar").style.transition = "";
+  $("#circuloRespirar").style.transform = "scale(0.85)";
+  $("#respirarTexto").textContent = "Pronto?";
+  $("#iniciarRespirar").hidden = false;
+  $("#pararRespirar").hidden = true;
+}
+function passoRespiracao(passos, i) {
+  if (!respirarTimer && i !== 0) return; // foi parado
+  const p = passos[i];
+  const circulo = $("#circuloRespirar");
+  circulo.style.transition = `transform ${p.seg}s ease-in-out`;
+  circulo.style.transform = `scale(${p.escala})`;
+  $("#respirarTexto").textContent = p.fase;
+  respirarTimer = setTimeout(() => {
+    const prox = (i + 1) % passos.length;
+    if (prox === 0) { respirarCiclos++; $("#ciclosRespirar").textContent = `Ciclos completos: ${respirarCiclos}`; }
+    passoRespiracao(passos, prox);
+  }, p.seg * 1000);
+}
+$("#iniciarRespirar").addEventListener("click", () => {
+  const passos = tecnicasRespirar[$("#tecnicaRespirar").value];
+  respirarCiclos = 0;
+  $("#ciclosRespirar").textContent = "";
+  $("#iniciarRespirar").hidden = true;
+  $("#pararRespirar").hidden = false;
+  respirarTimer = 1; // marca como ativo antes do primeiro passo
+  passoRespiracao(passos, 0);
+});
+$("#pararRespirar").addEventListener("click", pararRespiracao);
+
+// ---------- Checklist de busca de emprego ----------
+const checklistPadrao = [
+  "Currículo atualizado e revisado",
+  "Perfil do LinkedIn atualizado",
+  "Carta de apresentação pronta",
+  "Lista de referências profissionais",
+  "Cadastro em pelo menos 3 sites de vagas",
+  "E-mail profissional configurado",
+  "Respostas prontas para perguntas comuns de entrevista",
+  "Pesquisa feita sobre empresas de interesse",
+  "Roupas para entrevista organizadas",
+  "Meta de quantas vagas aplicar por semana definida",
+].map(texto => ({ id: id(), texto, feito: false }));
+let checklist = carregar("checklist", checklistPadrao);
+function desenharChecklist() {
+  const total = checklist.length;
+  const feitos = checklist.filter(i => i.feito).length;
+  const pct = total ? Math.round((feitos / total) * 100) : 0;
+  $("#checklistBarra").style.width = pct + "%";
+  $("#checklistResumo").textContent = total ? `${feitos} de ${total} itens concluídos (${pct}%)` : "";
+  const alvo = $("#listaChecklist");
+  alvo.innerHTML = total ? checklist.map(item => `
+    <li class="${item.feito ? "feito" : ""}">
+      <input type="checkbox" data-marcar="${item.id}" ${item.feito ? "checked" : ""}>
+      <span>${esc(item.texto)}</span>
+      <button class="btn-mini" data-remover="${item.id}" title="Remover">✕</button>
+    </li>`).join("") : `<p class="vazio-lista">Nenhum item ainda. Adicione um acima ou restaure os itens padrão.</p>`;
+}
+$("#checklistForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const texto = new FormData(e.target).get("texto").trim();
+  checklist.push({ id: id(), texto, feito: false });
+  salvar("checklist", checklist); e.target.reset(); desenharChecklist();
+});
+$("#listaChecklist").addEventListener("click", e => {
+  const marcar = e.target.dataset.marcar;
+  const remover = e.target.dataset.remover;
+  if (marcar) {
+    checklist.find(i => i.id === marcar).feito = e.target.checked;
+  } else if (remover) {
+    checklist = checklist.filter(i => i.id !== remover);
+  } else return;
+  salvar("checklist", checklist); desenharChecklist();
+});
+$("#restaurarChecklist").addEventListener("click", () => {
+  if (!confirm("Isso substitui sua lista atual pelos itens padrão. Continuar?")) return;
+  checklist = checklistPadrao.map(i => ({ ...i, id: id(), feito: false }));
+  salvar("checklist", checklist); desenharChecklist();
+});
+
 // ---------- Início ----------
 mostrarFrase();
 preencherFormulario();
@@ -423,4 +528,5 @@ desenharCarta();
 desenharMetas();
 desenharHabitos();
 desenharDiario();
+desenharChecklist();
 mostrarPagina();
