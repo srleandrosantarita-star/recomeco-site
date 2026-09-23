@@ -57,11 +57,28 @@ const frases = [
   "Não espere motivação para começar. Comece, e a motivação vem depois.",
 ];
 let fraseAtual = Math.floor(Math.random() * frases.length);
-function mostrarFrase() { $("#frase").textContent = "“" + frases[fraseAtual] + "”"; }
+let fraseIntervalo = null;
+function mostrarFrase() {
+  const el = $("#frase");
+  el.classList.remove("frase-anim");
+  void el.offsetWidth; // força o navegador a reiniciar a animação
+  el.textContent = "“" + frases[fraseAtual] + "”";
+  el.classList.add("frase-anim");
+}
+function avancarFrase() {
+  fraseAtual = (fraseAtual + 1) % frases.length;
+  mostrarFrase();
+}
+function reiniciarTrocaAutomatica() {
+  clearInterval(fraseIntervalo);
+  fraseIntervalo = setInterval(avancarFrase, 7000);
+}
 $("#novaFrase").addEventListener("click", () => {
   fraseAtual = (fraseAtual + 1 + Math.floor(Math.random() * (frases.length - 1))) % frases.length;
   mostrarFrase();
+  reiniciarTrocaAutomatica();
 });
+reiniciarTrocaAutomatica();
 
 // ---------- Currículo ----------
 const cvForm = $("#cvForm");

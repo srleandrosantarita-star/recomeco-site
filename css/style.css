@@ -124,7 +124,15 @@ h2::after {
   font-family: "Merriweather", serif; font-size: 3.5rem; color: var(--verde-claro);
   line-height: 1;
 }
-.frase { position: relative; font-size: 1.2rem; font-style: italic; margin: 0 0 18px; }
+.frase { position: relative; font-size: 1.2rem; font-style: italic; margin: 0 0 18px; min-height: 1.6em; }
+.frase.frase-anim { animation: fraseSurge .6s ease; }
+@keyframes fraseSurge {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .frase.frase-anim { animation: none; }
+}
 .grade-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; }
 .card-link {
   position: relative; display: block; padding: 26px 22px 22px; text-decoration: none; color: var(--texto);
