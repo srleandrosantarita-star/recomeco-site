@@ -115,7 +115,7 @@ function listaVirgula(txt) { return (txt || "").split(",").map(s => s.trim()).fi
 
 function desenharCv() {
   const p = $("#cvPreview");
-  const cor = cv.cor || "#2f6f5e";
+  const cor = cv.cor || "#1f6f5c";
   p.style.setProperty("--cor", cor);
   p.className = "cv " + (cv.modelo === "moderno" ? "moderno" : "classico");
 
@@ -201,7 +201,7 @@ $("#baixarPdf").addEventListener("click", () => {
 });
 $("#limparCv").addEventListener("click", () => {
   if (!confirm("Apagar todos os dados do currículo?")) return;
-  cv = { experiencia: [], formacao: [], modelo: "classico", cor: "#2f6f5e" };
+  cv = { experiencia: [], formacao: [], modelo: "classico", cor: "#1f6f5c" };
   cvForm.reset();
   preencherFormulario();
   atualizarCv();
@@ -226,7 +226,7 @@ $("#exemploCv").addEventListener("click", () => {
     habilidades: "Pacote Office, Excel intermediário, Atendimento ao cliente, Organização, Comunicação",
     idiomas: "Português nativo, Inglês básico",
     cursos: "Excel Avançado - SENAC (2023)\nAtendimento de Excelência - SEBRAE (2021)",
-    modelo: cv.modelo || "classico", cor: cv.cor || "#2f6f5e",
+    modelo: cv.modelo || "classico", cor: cv.cor || "#1f6f5c",
   };
   preencherFormulario();
   atualizarCv();
@@ -247,7 +247,7 @@ function dataPorExtenso() {
 function desenharCarta() {
   const p = $("#cartaPreview");
   p.className = "cv carta-doc " + (cv.modelo === "moderno" ? "" : "classico");
-  p.style.setProperty("--cor", cv.cor || "#2f6f5e");
+  p.style.setProperty("--cor", cv.cor || "#1f6f5c");
 
   if (!carta.nome && !carta.corpo && !carta.cargo) {
     p.innerHTML = `<p class="vazio">Preencha o formulário ou clique em "Gerar sugestão".<br>A prévia da sua carta aparece aqui.</p>`;
